@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react'
 
 import { fetchCollection } from './apiUtils'
 
-function Users({ apiBaseUrl }) {
+function Users() {
+  const codespaceName = import.meta.env.VITE_CODESPACE_NAME
+  const usersEndpoint = codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api/users/`
+    : 'http://localhost:8000/api/users/'
+
   const [state, setState] = useState({ loading: true, error: '', items: [], total: 0 })
 
   useEffect(() => {
@@ -10,7 +15,7 @@ function Users({ apiBaseUrl }) {
 
     async function loadUsers() {
       try {
-        const data = await fetchCollection(`${apiBaseUrl}/users/`)
+        const data = await fetchCollection(usersEndpoint)
         if (!ignore) {
           setState({ loading: false, error: '', ...data })
         }
@@ -25,7 +30,7 @@ function Users({ apiBaseUrl }) {
     return () => {
       ignore = true
     }
-  }, [apiBaseUrl])
+  }, [usersEndpoint])
 
   if (state.loading) return <p className="status">Loading users...</p>
   if (state.error) return <p className="status status-error">{state.error}</p>

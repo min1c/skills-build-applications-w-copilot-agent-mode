@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react'
 
 import { fetchCollection } from './apiUtils'
 
-function Workouts({ apiBaseUrl }) {
+function Workouts() {
+  const codespaceName = import.meta.env.VITE_CODESPACE_NAME
+  const workoutsEndpoint = codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api/workouts/`
+    : 'http://localhost:8000/api/workouts/'
+
   const [state, setState] = useState({ loading: true, error: '', items: [], total: 0 })
 
   useEffect(() => {
@@ -10,7 +15,7 @@ function Workouts({ apiBaseUrl }) {
 
     async function loadWorkouts() {
       try {
-        const data = await fetchCollection(`${apiBaseUrl}/workouts/`)
+        const data = await fetchCollection(workoutsEndpoint)
         if (!ignore) {
           setState({ loading: false, error: '', ...data })
         }
@@ -25,7 +30,7 @@ function Workouts({ apiBaseUrl }) {
     return () => {
       ignore = true
     }
-  }, [apiBaseUrl])
+  }, [workoutsEndpoint])
 
   if (state.loading) return <p className="status">Loading workouts...</p>
   if (state.error) return <p className="status status-error">{state.error}</p>

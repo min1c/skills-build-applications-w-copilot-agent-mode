@@ -9,7 +9,7 @@ import './App.css'
 
 function App() {
   const codespaceName = import.meta.env.VITE_CODESPACE_NAME
-  const apiBaseUrl = codespaceName
+  const displayApiRoot = codespaceName
     ? `https://${codespaceName}-8000.app.github.dev/api`
     : 'http://localhost:8000/api'
 
@@ -20,7 +20,7 @@ function App() {
           <h1>OctoFit Tracker</h1>
           <p className="subtitle">React 19 presentation tier for your multi-tier fitness app</p>
         </div>
-        <p className="api-url">API: {apiBaseUrl}</p>
+        <p className="api-url">API: {displayApiRoot}</p>
       </header>
 
       <nav className="route-nav" aria-label="Primary">
@@ -34,11 +34,11 @@ function App() {
       <main className="content-wrap">
         <Routes>
           <Route path="/" element={<Navigate to="/users" replace />} />
-          <Route path="/users" element={<Users apiBaseUrl={apiBaseUrl} />} />
-          <Route path="/teams" element={<Teams apiBaseUrl={apiBaseUrl} />} />
-          <Route path="/activities" element={<Activities apiBaseUrl={apiBaseUrl} />} />
-          <Route path="/leaderboard" element={<Leaderboard apiBaseUrl={apiBaseUrl} />} />
-          <Route path="/workouts" element={<Workouts apiBaseUrl={apiBaseUrl} />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/teams" element={<Teams />} />
+          <Route path="/activities" element={<Activities />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/workouts" element={<Workouts />} />
         </Routes>
       </main>
     </div>

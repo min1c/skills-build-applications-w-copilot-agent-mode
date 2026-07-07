@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react'
 
 import { fetchCollection } from './apiUtils'
 
-function Teams({ apiBaseUrl }) {
+function Teams() {
+  const codespaceName = import.meta.env.VITE_CODESPACE_NAME
+  const teamsEndpoint = codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api/teams/`
+    : 'http://localhost:8000/api/teams/'
+
   const [state, setState] = useState({ loading: true, error: '', items: [], total: 0 })
 
   useEffect(() => {
@@ -10,7 +15,7 @@ function Teams({ apiBaseUrl }) {
 
     async function loadTeams() {
       try {
-        const data = await fetchCollection(`${apiBaseUrl}/teams/`)
+        const data = await fetchCollection(teamsEndpoint)
         if (!ignore) {
           setState({ loading: false, error: '', ...data })
         }
@@ -25,7 +30,7 @@ function Teams({ apiBaseUrl }) {
     return () => {
       ignore = true
     }
-  }, [apiBaseUrl])
+  }, [teamsEndpoint])
 
   if (state.loading) return <p className="status">Loading teams...</p>
   if (state.error) return <p className="status status-error">{state.error}</p>

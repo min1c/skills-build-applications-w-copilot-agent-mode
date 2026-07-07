@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react'
 
 import { fetchCollection } from './apiUtils'
 
-function Leaderboard({ apiBaseUrl }) {
+function Leaderboard() {
+  const codespaceName = import.meta.env.VITE_CODESPACE_NAME
+  const leaderboardEndpoint = codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api/leaderboard/`
+    : 'http://localhost:8000/api/leaderboard/'
+
   const [state, setState] = useState({ loading: true, error: '', items: [], total: 0 })
 
   useEffect(() => {
@@ -10,7 +15,7 @@ function Leaderboard({ apiBaseUrl }) {
 
     async function loadLeaderboard() {
       try {
-        const data = await fetchCollection(`${apiBaseUrl}/leaderboard/`)
+        const data = await fetchCollection(leaderboardEndpoint)
         if (!ignore) {
           setState({ loading: false, error: '', ...data })
         }
@@ -25,7 +30,7 @@ function Leaderboard({ apiBaseUrl }) {
     return () => {
       ignore = true
     }
-  }, [apiBaseUrl])
+  }, [leaderboardEndpoint])
 
   if (state.loading) return <p className="status">Loading leaderboard...</p>
   if (state.error) return <p className="status status-error">{state.error}</p>
