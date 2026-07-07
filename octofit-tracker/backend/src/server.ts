@@ -8,16 +8,16 @@ import { User } from './models/user.model';
 import { Workout } from './models/workout.model';
 
 const app = express();
-const port = Number(process.env.PORT) || 8000;
+const port = 8000;
 const codespaceName = process.env.CODESPACE_NAME;
-const apiBaseUrl = codespaceName
+const baseUrl = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev`
-  : `http://localhost:${port}`;
+  : 'http://localhost:8000';
 
 app.use(express.json());
 
 app.get('/api/health', (_req, res) => {
-  res.status(200).json({ status: 'ok', apiBaseUrl });
+  res.status(200).json({ status: 'ok', baseUrl });
 });
 
 app.get('/api/users/', async (_req, res) => {
@@ -74,5 +74,5 @@ app.get('/api/workouts/', async (_req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Octofit backend listening on ${apiBaseUrl}`);
+  console.log(`Octofit backend listening on ${baseUrl}`);
 });
