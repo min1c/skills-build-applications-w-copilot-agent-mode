@@ -1,0 +1,88 @@
+.app-shell {
+  min-height: 100vh;
+  padding: 2rem 1rem 3rem;
+}
+
+.topbar {
+  background: linear-gradient(120deg, #ffedd5, #fde68a 45%, #d9f99d);
+  border: 2px solid #0f172a;
+  border-radius: 18px;
+  padding: 1.25rem;
+  box-shadow: 8px 8px 0 #0f172a;
+  margin-bottom: 1rem;
+}
+
+.topbar h1 {
+  margin: 0;
+}
+
+.subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.95rem;
+}
+
+.api-url {
+  margin: 0.75rem 0 0;
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+}
+
+.route-nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.route-nav a {
+  text-decoration: none;
+  color: #0f172a;
+  border: 2px solid #0f172a;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  background: #ffffff;
+  font-weight: 600;
+}
+
+.route-nav a.active {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.content-wrap {
+  border: 2px solid #0f172a;
+  border-radius: 16px;
+  background: #ffffff;
+  padding: 1rem;
+}
+
+.meta,
+.status {
+  margin-bottom: 1rem;
+}
+
+.status-error {
+  color: #b91c1c;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.data-card {
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 0.75rem;
+  background: #f8fafc;
+}
+
+.data-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.data-card p {
+  margin: 0.2rem 0;
+}
